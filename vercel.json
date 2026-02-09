@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "buildCommand": "npm run build --workspace=@moviehub/web",
+  "outputDirectory": "apps/web/.next",
+  "framework": "nextjs",
+  "installCommand": "npm install",
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "/api/:path*"
+    }
+  ]
+}
