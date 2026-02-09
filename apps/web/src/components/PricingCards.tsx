@@ -2,9 +2,11 @@
 
 import { useSession } from 'next-auth/react';
 
-const apiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL ?? process.env.BACKEND_API_URL;
+const apiUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
 
 const startCheckout = async (path: string, body?: Record<string, string>) => {
+  if (!apiUrl) throw new Error('NEXT_PUBLIC_BACKEND_API_URL is not configured');
+
   const sessionResponse = await fetch('/api/session-token');
   const { accessToken } = await sessionResponse.json();
 

@@ -56,8 +56,10 @@ billingRouter.post('/webhooks/stripe', async (req: Request, res: Response) => {
     }
 
     if (userId && session.mode === 'payment' && session.metadata?.movieId) {
-      await prisma.purchase.create({
-        data: {
+      await prisma.purchase.upsert({
+        where: { stripeSessionId: session.id },
+        update: {},
+        create: {
           userId,
           movieId: session.metadata.movieId,
           stripeSessionId: session.id,
